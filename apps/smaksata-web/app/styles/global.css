@@ -119,3 +119,4 @@
   border-style: dashed;
   border-color: #f87171;
 }
+@source "../../../../packages/shared-ui/**/*.{ts,tsx}";

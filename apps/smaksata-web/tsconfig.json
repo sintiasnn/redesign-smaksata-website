@@ -31,4 +31,5 @@
         "tests-e2e/**/*"
     ],
     "exclude": ["tests-results"],
+    "references": [{ "path": "../../packages/shared-ui" }]
 }
