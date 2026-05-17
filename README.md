@@ -126,6 +126,8 @@ npm run build
 
 Project ini terbuka untuk alumni SMK Negeri 1 Tabanan yang punya pengalaman **UI/UX Design**, **Frontend**, atau **Fullstack** dan ingin berkontribusi. Silakan hubungi author melalui Instagram DM [@nptsintias](https://instagram.com/nptsintias) untuk koordinasi lebih lanjut.
 
+Lihat [CONTRIBUTING.md](CONTRIBUTING.md) untuk pedoman kontribusi, aturan coding, dan alur git.
+
 ---
 
 ## Author
