@@ -49,7 +49,7 @@ Terima kasih sudah tertarik berkontribusi di project redesign website SMK Negeri
 ## Gambar
 
 - Format: **WebP** (prioritas) atau **JPEG quality 80%**.
-- Ukuran maks: lihat `image-guide.md` di root project.
+- Ukuran maks: lihat [image-guide.md](image-guide.md) untuk spesifikasi lengkap (resolusi, format, dan penamaan file).
 - Taruh di folder `src/assets/images/`.
 - Jangan commit foto screenshot pribadi atau foto tidak resmi.
 
