@@ -4,7 +4,7 @@
 ![JavaScript](https://img.shields.io/badge/JavaScript-ES6-F7DF1E?logo=javascript)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-06B6D4?logo=tailwindcss)
 
-[Live Site](https://smkn1tabanan.sch.id)
+> **Live site:** [smkn1tabanan.sch.id](https://smkn1tabanan.sch.id) — ini adalah **situs lama** (WordPress) yang masih berjalan. Repo ini adalah proses redesign. Setelah selesai dan mendapat persetujuan pihak sekolah, hasil redesign akan dideploy ke domain resmi.
 
 Landing page modern untuk SMK Negeri 1 Tabanan — sekolah menengah kejuruan di Bali. Dibangun dengan Vite dan Tailwind CSS, menampilkan informasi program keahlian yang akurat bersumber dari Instagram resmi dan website sekolah.
 
