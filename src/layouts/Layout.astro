@@ -110,13 +110,13 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/')
             <li><a href={base + 'sejarah'} class="footer-link">Sejarah</a></li>
             <li><a href={base + 'fasilitas'} class="footer-link">Fasilitas</a></li>
             <li><a href={base + 'prestasi'} class="footer-link">Prestasi</a></li>
+            <li><a href={base + '#galeri'} class="footer-link">Galeri</a></li>
           </ul>
         </div>
         <div>
           <h3 class="footer-heading">Program</h3>
           <ul class="space-y-2">
             {programs.map((p: any) => <li><a href={base + 'detail/' + p.id} class="footer-link">{p.nama}</a></li>)}
-            <li class="pt-2"><a href={base + '#galeri'} class="footer-link text-sm text-neutral-500">Galeri Foto</a></li>
           </ul>
         </div>
         <div>
