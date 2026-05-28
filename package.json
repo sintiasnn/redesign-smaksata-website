@@ -6,17 +6,21 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "typecheck": "astro check",
+    "lint": "astro check"
   },
   "dependencies": {
     "aos": "^2.3.4",
     "swiper": "^11.0.5"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.9",
     "@astrojs/mdx": "^5.0.1",
     "@tailwindcss/vite": "4.1.6",
     "astro": "^6.0.5",
     "gh-pages": "^6.3.0",
-    "tailwindcss": "4.1.6"
+    "tailwindcss": "4.1.6",
+    "typescript": "^6.0.3"
   }
 }

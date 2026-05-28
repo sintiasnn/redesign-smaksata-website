@@ -1,4 +1,7 @@
 @import "tailwindcss";
+@import "swiper/css";
+@import "swiper/css/navigation";
+@import "swiper/css/pagination";
 
 @theme {
   --color-primary-50: #E8EDF2;
@@ -223,6 +226,9 @@ section {
   max-height: 100vh;
 }
 
+.hero-page-banner {
+  background: linear-gradient(135deg, var(--color-primary-500), var(--color-primary-600));
+}
 .hero-section { position: relative; min-height: 100vh; overflow: hidden; }
 .hero-content { position: relative; z-index: 10; color: #fff; max-width: 36rem; }
 .hero-slider .swiper-slide { height: 100vh; }

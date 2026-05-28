@@ -1,0 +1,101 @@
+---
+export interface Props {
+  programs: Array<{ id: string; singkat: string; }>
+}
+
+const { programs } = Astro.props
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/')
+---
+
+<header id="header" class="fixed w-full z-50 transition-all duration-300 bg-primary-900/85 backdrop-blur-md">
+  <div class="container">
+    <nav class="flex items-center justify-between h-20">
+      <a href={base} class="flex items-center gap-3">
+        <img src={base + 'assets/logo.png'} alt="SMK Negeri 1 Tabanan" class="h-12 w-auto">
+        <div class="hidden sm:block">
+          <span class="text-white font-bold text-sm leading-tight block">SMK Negeri 1 Tabanan</span>
+        </div>
+      </a>
+      <ul class="hidden lg:flex items-center gap-1">
+        <li class="nav-item"><a href={base + '#beranda'} class="nav-link">Beranda</a></li>
+        <li class="nav-item dropdown">
+          <a href={base + '#profil'} class="nav-link dropdown-toggle">Profil</a>
+          <ul class="dropdown-menu">
+            <li><a href={base + '#profil'} class="dropdown-link">Visi & Misi</a></li>
+            <li><a href={base + 'sejarah'} class="dropdown-link">Sejarah</a></li>
+            <li><a href={base + 'fasilitas'} class="dropdown-link">Fasilitas</a></li>
+            <li><a href={base + 'prestasi'} class="dropdown-link">Prestasi</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a href={base + '#program'} class="nav-link dropdown-toggle">Program</a>
+          <ul class="dropdown-menu">
+            {programs.map((p) => <li><a href={base + 'detail/' + p.id} class="dropdown-link">{p.singkat}</a></li>)}
+          </ul>
+        </li>
+        <li class="nav-item"><a href={base + '#berita'} class="nav-link">Berita</a></li>
+        <li class="nav-item"><a href={base + '#kontak'} class="nav-link">Kontak</a></li>
+        <li class="nav-item"><a href="https://bali.spmb.id" class="btn btn-accent text-sm px-4 py-2 ml-2" target="_blank" rel="noopener noreferrer">PPDB Online</a></li>
+      </ul>
+      <button id="menu-toggle" class="lg:hidden menu-button" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<div id="mobile-menu" class="fixed inset-0 bg-primary-900/95 z-40 translate-x-full lg:hidden">
+  <div class="flex flex-col items-center justify-center h-full">
+    <button id="menu-close" class="absolute top-6 right-6 text-white text-3xl">&times;</button>
+    <div class="mobile-nav">
+      <a href={base + '#beranda'} class="mobile-nav-link" data-section>Beranda</a>
+      <div class="mobile-nav-group">
+        <button class="mobile-nav-toggle">Profil</button>
+        <div class="mobile-nav-sub">
+          <a href={base + '#profil'} class="mobile-nav-link" data-section>Visi & Misi</a>
+          <a href={base + 'sejarah'} class="mobile-nav-link">Sejarah</a>
+          <a href={base + 'fasilitas'} class="mobile-nav-link">Fasilitas</a>
+          <a href={base + 'prestasi'} class="mobile-nav-link">Prestasi</a>
+        </div>
+      </div>
+      <div class="mobile-nav-group">
+        <button class="mobile-nav-toggle">Program</button>
+        <div class="mobile-nav-sub">
+          {programs.map((p) => <a href={base + 'detail/' + p.id} class="mobile-nav-link">{p.singkat}</a>)}
+        </div>
+      </div>
+      <a href={base + '#berita'} class="mobile-nav-link" data-section>Berita</a>
+      <a href={base + '#kontak'} class="mobile-nav-link" data-section>Kontak</a>
+      <a href="https://bali.spmb.id" class="btn btn-accent mt-6" target="_blank" rel="noopener noreferrer">PPDB Online</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  const menuToggle = document.getElementById('menu-toggle')
+  const menuClose = document.getElementById('menu-close')
+  const mobileMenu = document.getElementById('mobile-menu')
+
+  const closeMenu = () => {
+    mobileMenu?.classList.add('translate-x-full')
+    menuToggle?.classList.remove('open')
+    document.body.style.overflow = ''
+  }
+
+  menuToggle?.addEventListener('click', () => {
+    mobileMenu?.classList.remove('translate-x-full')
+    menuToggle?.classList.add('open')
+    document.body.style.overflow = 'hidden'
+  })
+
+  menuClose?.addEventListener('click', closeMenu)
+  document.querySelectorAll('[data-section]').forEach(l => l.addEventListener('click', closeMenu))
+
+  document.querySelectorAll('.mobile-nav-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      btn.classList.toggle('open')
+      const sub = btn.nextElementSibling
+      if (sub) sub.classList.toggle('open')
+    })
+  })
+</script>

@@ -30,16 +30,4 @@ const berita = defineCollection({
     tags: z.array(z.string()).optional(),
   }),
 })
-
-const acara = defineCollection({
-  loader: glob({ pattern: '*.mdx', base: 'src/content/acara' }),
-  schema: z.object({
-    title: z.string(),
-    date: z.string(),
-    desc: z.string(),
-    image: z.string().optional(),
-    type: z.enum(['workshop', 'meetup', 'lomba', 'sosialisasi', 'lainnya']).optional(),
-  }),
-})
-
-export const collections = { programs, berita, acara }
+export const collections = { programs, berita }

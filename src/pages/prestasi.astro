@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro'
+import PageHero from '../components/PageHero.astro'
 
 const prestasi = [
   { title: 'Juara LKS Tingkat Nasional', desc: 'Juara 1 Lomba Kompetensi Siswa bidang Akuntansi tingkat Nasional 2023' },
@@ -9,12 +10,7 @@ const prestasi = [
 ---
 
 <Layout title="Prestasi — SMK Negeri 1 Tabanan" description="Berbagai prestasi membanggakan yang telah diraih SMK Negeri 1 Tabanan">
-  <section class="min-h-[40vh] flex items-center bg-primary-900 text-white" style="background: linear-gradient(135deg, #1B3A5C, #162E4A);">
-    <div class="container text-center">
-      <h1 class="text-4xl md:text-5xl font-bold mb-4">Prestasi Kami</h1>
-      <p class="text-lg text-neutral-300">Berbagai prestasi membanggakan yang telah diraih di berbagai bidang</p>
-    </div>
-  </section>
+  <PageHero title="Prestasi Kami" description="Berbagai prestasi membanggakan yang telah diraih di berbagai bidang" />
 
   <section class="py-16 md:py-24 bg-neutral-50">
     <div class="container">

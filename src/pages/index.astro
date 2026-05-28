@@ -1,24 +1,24 @@
 ---
 import Layout from '../layouts/Layout.astro'
-import { getCollection } from 'astro:content'
+import { getCollection, type CollectionEntry } from 'astro:content'
 
-const berita = (await getCollection('berita'))
-  .map(e => ({ ...e.data, description: e.body?.slice(0, 150) }))
-  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+const berita: Array<CollectionEntry<'berita'>['data'] & { description: string }> = (await getCollection('berita'))
+  .map((e: CollectionEntry<'berita'>) => ({ ...e.data, description: e.body?.slice(0, 150) ?? '' }))
+  .sort((a: { date: string }, b: { date: string }) => new Date(b.date).getTime() - new Date(a.date).getTime())
 
-const programData = (await getCollection('programs'))
-  .map(e => e.data)
+const programData: Array<CollectionEntry<'programs'>['data']> = (await getCollection('programs'))
+  .map((e: CollectionEntry<'programs'>) => e.data)
 
-const colorClasses = { primary: 'text-primary-500 hover:text-primary-600', secondary: 'text-secondary-600 hover:text-secondary-700', accent: 'text-accent-600 hover:text-accent-700' }
-
-const getProgramImage = (id: string) => {
-  const map = { akl: 'akuntansi', bdp: 'bisnis-digital', otkp: 'manajemen-perkantoran', tkj: 'tkj' }
-  return `${base}assets/images/program-${map[id as keyof typeof map]}.svg`
-}
+const colorClasses: Record<string, string> = { primary: 'text-primary-500 hover:text-primary-600', secondary: 'text-secondary-600 hover:text-secondary-700', accent: 'text-accent-600 hover:text-accent-700' }
 
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/')
 
-const galleryImages = Array.from({ length: 13 }, (_, i) => `${base}assets/images/galeri-${String(i + 1).padStart(2, '0')}.jpg`)
+const getProgramImage = (id: string) => {
+  const map: Record<string, string> = { akl: 'akuntansi', bdp: 'bisnis-digital', otkp: 'manajemen-perkantoran', tkj: 'tkj' }
+  return `${base}assets/images/program-${map[id]}.svg`
+}
+
+const galleryImages: string[] = Array.from({ length: 13 }, (_, i) => `${base}assets/images/galeri-${String(i + 1).padStart(2, '0')}.jpg`)
 
 const formatDate = (d: string) => {
   try { return new Date(d).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }) } catch { return d }
@@ -39,7 +39,7 @@ const formatDate = (d: string) => {
               <p class="text-lg md:text-xl mb-8">Membentuk generasi unggul yang terampil, profesional, dan berkarakter</p>
               <div class="flex flex-wrap gap-4">
                 <a href="#program" class="btn btn-accent">Program Keahlian</a>
-                <a href="https://bali.spmb.id" class="btn btn-outline-white" target="_blank">PPDB Online</a>
+                <a href="https://bali.spmb.id" class="btn btn-outline-white" target="_blank" rel="noopener noreferrer">PPDB Online</a>
               </div>
             </div>
           </div>
@@ -51,7 +51,7 @@ const formatDate = (d: string) => {
             <div class="hero-content" data-aos="fade-up">
               <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">Fasilitas Modern<br>Pembelajaran Optimal</h1>
               <p class="text-lg md:text-xl mb-8">Didukung fasilitas lengkap dan teknologi terkini untuk pembelajaran yang efektif</p>
-              <a href="/fasilitas" class="btn btn-accent">Lihat Fasilitas</a>
+              <a href={base + 'fasilitas'} class="btn btn-accent">Lihat Fasilitas</a>
             </div>
           </div>
         </div>
@@ -62,7 +62,7 @@ const formatDate = (d: string) => {
             <div class="hero-content" data-aos="fade-up">
               <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">Prestasi Membanggakan<br>Lulusan Berkualitas</h1>
               <p class="text-lg md:text-xl mb-8">Raih berbagai prestasi di tingkat kabupaten, provinsi, dan nasional</p>
-              <a href="/fasilitas" class="btn btn-accent">Lihat Prestasi</a>
+              <a href={base + 'prestasi'} class="btn btn-accent">Lihat Prestasi</a>
             </div>
           </div>
         </div>
@@ -142,7 +142,6 @@ const formatDate = (d: string) => {
               <div class="text-sm text-neutral-500 mb-2">{formatDate(b.date)}</div>
               <h3 class="text-xl font-bold mb-3">{b.title}</h3>
               <p class="text-neutral-600 mb-4">{b.description}</p>
-              <a href="#" class="text-primary-500 font-medium hover:text-primary-600">Baca selengkapnya →</a>
             </div>
           </div>
         ))}
@@ -159,7 +158,7 @@ const formatDate = (d: string) => {
       </div>
       <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {galleryImages.map((src, i) => (
-          <div class="relative group cursor-pointer overflow-hidden rounded-xl" onclick={`openLightbox(${i})`} data-aos="zoom-in" data-aos-delay={(i % 4) * 100}>
+          <div class="relative group cursor-pointer overflow-hidden rounded-xl gallery-item" data-index={i} data-aos="zoom-in" data-aos-delay={(i % 4) * 100}>
             <img src={src} alt="Dokumentasi Sekolah" class="w-full h-48 md:h-56 object-cover transition-transform duration-500 group-hover:scale-110">
             <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
               <span class="text-white text-sm font-medium">Dokumentasi Sekolah</span>
@@ -171,7 +170,7 @@ const formatDate = (d: string) => {
   </section>
 
   <!-- Lightbox -->
-  <div id="lightbox" class="fixed inset-0 bg-black/90 z-50 hidden items-center justify-center" onclick="closeLightbox(event)">
+  <div id="lightbox" class="fixed inset-0 bg-black/90 z-50 hidden items-center justify-center">
     <button id="close-lightbox" class="absolute top-4 right-4 text-white text-4xl z-10 hover:text-neutral-300">&times;</button>
     <button id="prev-btn" class="absolute left-4 top-1/2 -translate-y-1/2 text-white text-4xl z-10 hover:text-neutral-300">&lsaquo;</button>
     <button id="next-btn" class="absolute right-4 top-1/2 -translate-y-1/2 text-white text-4xl z-10 hover:text-neutral-300">&rsaquo;</button>
@@ -189,22 +188,22 @@ const formatDate = (d: string) => {
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
         <div class="contact-form bg-neutral-50 p-8 rounded-xl shadow-md" data-aos="fade-right">
           <h3 class="text-2xl font-bold mb-6">Kirim Pesan</h3>
-          <form id="contact-form">
+          <form id="contact-form" action="https://formspree.io/f/your-form-id" method="POST">
             <div class="form-group mb-4">
               <label for="name">Nama Lengkap</label>
-              <input type="text" id="name" class="form-input" placeholder="Masukkan nama Anda" required>
+              <input type="text" id="name" name="name" class="form-input" placeholder="Masukkan nama Anda" required>
             </div>
             <div class="form-group mb-4">
               <label for="email">Email</label>
-              <input type="email" id="email" class="form-input" placeholder="Masukkan email Anda" required>
+              <input type="email" id="email" name="email" class="form-input" placeholder="Masukkan email Anda" required>
             </div>
             <div class="form-group mb-4">
               <label for="subject">Subjek</label>
-              <input type="text" id="subject" class="form-input" placeholder="Masukkan subjek pesan">
+              <input type="text" id="subject" name="subject" class="form-input" placeholder="Masukkan subjek pesan">
             </div>
             <div class="form-group mb-6">
               <label for="message">Pesan</label>
-              <textarea id="message" rows="5" class="form-input" placeholder="Masukkan pesan Anda" required></textarea>
+              <textarea id="message" name="message" rows="5" class="form-input" placeholder="Masukkan pesan Anda" required></textarea>
             </div>
             <button type="submit" class="btn btn-primary w-full">Kirim Pesan</button>
           </form>
@@ -220,7 +219,7 @@ const formatDate = (d: string) => {
             </div>
           </div>
           <div class="map-container">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3945.7123841325473!2d115.11931661478386!3d-8.538029993857748!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd23b5c0a7b3bcd%3A0x4030bfbca7d0c70!2sSMK%20Negeri%201%20Tabanan!5e0!3m2!1sen!2sid!4v1645523452678!5m2!1sen!2sid" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3945.7123841325473!2d115.11931661478386!3d-8.538029993857748!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd23b5c0a7b3bcd%3A0x4030bfbca7d0c70!2sSMK%20Negeri%201%20Tabanan!5e0!3m2!1sen!2sid!4v1645523452678!5m2!1sen!2sid" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" title="Lokasi SMK Negeri 1 Tabanan"></iframe>
           </div>
         </div>
       </div>
@@ -229,27 +228,65 @@ const formatDate = (d: string) => {
 </Layout>
 
 <script>
+  import Swiper from 'swiper'
+
   new Swiper('.hero-slider', { loop: true, autoplay: { delay: 5000 }, pagination: { el: '.swiper-pagination', clickable: true }, navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }, effect: 'fade', fadeEffect: { crossFade: true } })
 
   let currentIndex = 0
   const galleryImgs = document.querySelectorAll('#gallery-grid > div')
   const lightbox = document.getElementById('lightbox')
-  const lightboxImg = document.getElementById('lightbox-img')
+  const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement | null
   const lightboxCaption = document.getElementById('lightbox-caption')
 
-  window.openLightbox = (i) => { currentIndex = i; update(i); lightbox?.classList.remove('hidden'); lightbox?.classList.add('flex'); document.body.style.overflow = 'hidden' }
-  window.closeLightbox = (e) => { if (e?.target === e?.currentTarget) { lightbox?.classList.add('hidden'); lightbox?.classList.remove('flex'); document.body.style.overflow = '' } }
-  function update(i) { const el = galleryImgs[i]; if (!el) return; const s = el.querySelector('img')?.src; const c = el.querySelector('span')?.textContent; if (lightboxImg) lightboxImg.src = s || ''; if (lightboxCaption) lightboxCaption.textContent = c || '' }
-  document.getElementById('close-lightbox')?.addEventListener('click', () => { lightbox?.classList.add('hidden'); lightbox?.classList.remove('flex'); document.body.style.overflow = '' })
-  document.getElementById('prev-btn')?.addEventListener('click', (e) => { e.stopPropagation(); currentIndex = (currentIndex - 1 + galleryImgs.length) % galleryImgs.length; update(currentIndex) })
-  document.getElementById('next-btn')?.addEventListener('click', (e) => { e.stopPropagation(); currentIndex = (currentIndex + 1) % galleryImgs.length; update(currentIndex) })
-  document.addEventListener('keydown', (e) => { if (!lightbox?.classList.contains('hidden')) { if (e.key === 'Escape') { lightbox.classList.add('hidden'); lightbox.classList.remove('flex'); document.body.style.overflow = '' } if (e.key === 'ArrowLeft') { currentIndex = (currentIndex - 1 + galleryImgs.length) % galleryImgs.length; update(currentIndex) } if (e.key === 'ArrowRight') { currentIndex = (currentIndex + 1) % galleryImgs.length; update(currentIndex) } } })
+  const closeLightbox = () => {
+    lightbox?.classList.add('hidden')
+    lightbox?.classList.remove('flex')
+    document.body.style.overflow = ''
+  }
 
-  document.getElementById('contact-form')?.addEventListener('submit', (e) => {
-    e.preventDefault(); const name = document.getElementById('name'), email = document.getElementById('email'), msg = document.getElementById('message')
-    if (!name?.value || !email?.value || !msg?.value) { alert('Harap isi semua field yang wajib'); return }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) { alert('Masukkan alamat email yang valid'); return }
-    const btn = e.target.querySelector('button[type="submit"]'); btn.textContent = 'Mengirim...'; btn.disabled = true
-    setTimeout(() => { alert('Pesan berhasil dikirim! Kami akan menghubungi Anda segera.'); e.target.reset(); btn.textContent = 'Kirim Pesan'; btn.disabled = false }, 1500)
+  function updateLightbox(i: number) {
+    const el = galleryImgs[i] as HTMLElement | undefined
+    if (!el) return
+    const s = el.querySelector('img')?.src
+    const c = el.querySelector('span')?.textContent
+    if (lightboxImg) lightboxImg.src = s || ''
+    if (lightboxCaption) lightboxCaption.textContent = c || ''
+  }
+
+  galleryImgs.forEach((el) => {
+    el.addEventListener('click', () => {
+      const i = parseInt((el as HTMLElement).dataset.index || '0')
+      currentIndex = i
+      updateLightbox(i)
+      lightbox?.classList.remove('hidden')
+      lightbox?.classList.add('flex')
+      document.body.style.overflow = 'hidden'
+    })
+  })
+
+  lightbox?.addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) closeLightbox()
+  })
+
+  document.getElementById('close-lightbox')?.addEventListener('click', closeLightbox)
+
+  document.getElementById('prev-btn')?.addEventListener('click', (e) => {
+    e.stopPropagation()
+    currentIndex = (currentIndex - 1 + galleryImgs.length) % galleryImgs.length
+    updateLightbox(currentIndex)
+  })
+
+  document.getElementById('next-btn')?.addEventListener('click', (e) => {
+    e.stopPropagation()
+    currentIndex = (currentIndex + 1) % galleryImgs.length
+    updateLightbox(currentIndex)
+  })
+
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox?.classList.contains('hidden')) {
+      if (e.key === 'Escape') { closeLightbox() }
+      if (e.key === 'ArrowLeft') { currentIndex = (currentIndex - 1 + galleryImgs.length) % galleryImgs.length; updateLightbox(currentIndex) }
+      if (e.key === 'ArrowRight') { currentIndex = (currentIndex + 1) % galleryImgs.length; updateLightbox(currentIndex) }
+    }
   })
 </script>

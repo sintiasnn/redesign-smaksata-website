@@ -1,19 +1,21 @@
 ---
 import Layout from '../../layouts/Layout.astro'
-import { getCollection } from 'astro:content'
+import { getCollection, type CollectionEntry } from 'astro:content'
+
+type Program = CollectionEntry<'programs'>['data']
 
 export async function getStaticPaths() {
   const programs = await getCollection('programs')
-  return programs.map((entry) => ({
+  return programs.map((entry: CollectionEntry<'programs'>) => ({
     params: { id: entry.data.id },
     props: { program: entry.data },
   }))
 }
 
-const { program } = Astro.props
+const { program } = Astro.props as { program: Program }
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/')
 
-const heroBgMap = {
+const heroBgMap: Record<string, string> = {
   akl: `${base}assets/images/program-akuntansi.svg`,
   bdp: `${base}assets/images/program-bisnis-digital.svg`,
   otkp: `${base}assets/images/program-manajemen-perkantoran.svg`,
@@ -22,8 +24,9 @@ const heroBgMap = {
 ---
 
 <Layout title={`${program.nama} — SMK Negeri 1 Tabanan`} description={program.deskripsi}>
-  <section class="relative min-h-[50vh] flex items-center" style={`background: linear-gradient(135deg, #0A3D62, #0066c0); background-image: url('${heroBgMap[program.id]}'); background-size: cover; background-position: center;`}>
-    <div class="absolute inset-0 bg-black/60"></div>
+  <section class="relative min-h-[50vh] flex items-center hero-page-banner overflow-hidden">
+    <img src={heroBgMap[program.id]} alt="" class="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-50">
+    <div class="absolute inset-0 bg-black/40"></div>
     <div class="container relative z-10 text-white text-center">
       <span class="inline-block bg-accent-500 text-neutral-900 text-sm font-bold px-4 py-2 rounded-full mb-4">{program.kode} — {program.singkat}</span>
       <h1 class="text-4xl md:text-5xl font-bold mb-4">{program.nama}</h1>
@@ -55,7 +58,7 @@ const heroBgMap = {
     </div>
   </section>
 
-  {program.fasilitas?.length > 0 && (
+  {program.fasilitas && program.fasilitas.length > 0 && (
     <section class="py-16 bg-white">
       <div class="container max-w-4xl">
         <h2 class="text-2xl md:text-3xl font-bold mb-8 text-center" data-aos="fade-up">Fasilitas</h2>
@@ -101,7 +104,7 @@ const heroBgMap = {
       <h2 class="text-3xl font-bold mb-4">Tertarik Bergabung?</h2>
       <p class="text-lg text-neutral-300 mb-8">Daftarkan dirimu sekarang dan raih masa depan cerah bersama SMK Negeri 1 Tabanan</p>
       <div class="flex flex-wrap justify-center gap-4">
-        <a href="https://bali.spmb.id" class="btn btn-accent" target="_blank">Daftar PPDB Online</a>
+        <a href="https://bali.spmb.id" class="btn btn-accent" target="_blank" rel="noopener noreferrer">Daftar PPDB Online</a>
         <a href={base + '#kontak'} class="btn btn-outline-white">Hubungi Kami</a>
       </div>
     </div>
