@@ -33,19 +33,27 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/')
             <span class="text-white font-bold text-sm leading-tight block">SMK Negeri 1 Tabanan</span>
           </div>
         </a>
-        <div class="hidden lg:flex items-center gap-1">
-          <a href="/#beranda" class="nav-link">Beranda</a>
-          <a href="/#profil" class="nav-link">Profil</a>
-          <a href="/#sejarah" class="nav-link">Sejarah</a>
-          <a href="/#program" class="nav-link">Program</a>
-          <a href="/#fasilitas" class="nav-link">Fasilitas</a>
-          <a href="/#prestasi" class="nav-link">Prestasi</a>
-          <a href="/#berita" class="nav-link">Berita</a>
-          <a href="/#galeri" class="nav-link">Galeri</a>
-          <a href="/#acara" class="nav-link">Acara</a>
-          <a href="/#kontak" class="nav-link">Kontak</a>
-          <a href="https://bali.spmb.id" class="btn btn-accent text-sm px-4 py-2 ml-2" target="_blank">PPDB Online</a>
-        </div>
+        <ul class="hidden lg:flex items-center gap-1">
+          <li class="nav-item"><a href="/#beranda" class="nav-link">Beranda</a></li>
+          <li class="nav-item dropdown">
+            <a href="/#profil" class="nav-link dropdown-toggle">Profil</a>
+            <ul class="dropdown-menu">
+              <li><a href="/#sejarah" class="dropdown-link">Sejarah</a></li>
+              <li><a href="/#fasilitas" class="dropdown-link">Fasilitas</a></li>
+              <li><a href="/#prestasi" class="dropdown-link">Prestasi</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a href="/#program" class="nav-link dropdown-toggle">Program</a>
+            <ul class="dropdown-menu">
+              {programs.map((p: any) => <li><a href={`/detail/${p.id}`} class="dropdown-link">{p.singkat}</a></li>)}
+            </ul>
+          </li>
+          <li class="nav-item"><a href="/#berita" class="nav-link">Berita</a></li>
+          <li class="nav-item"><a href="/#galeri" class="nav-link">Galeri</a></li>
+          <li class="nav-item"><a href="/#kontak" class="nav-link">Kontak</a></li>
+          <li class="nav-item"><a href="https://bali.spmb.id" class="btn btn-accent text-sm px-4 py-2 ml-2" target="_blank">PPDB Online</a></li>
+        </ul>
         <button id="menu-toggle" class="lg:hidden menu-button" aria-label="Menu">
           <span></span><span></span><span></span>
         </button>
@@ -54,19 +62,29 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/')
   </header>
 
   <div id="mobile-menu" class="fixed inset-0 bg-primary-900/95 z-40 translate-x-full lg:hidden">
-    <div class="flex flex-col items-center justify-center h-full space-y-8">
+    <div class="flex flex-col items-center justify-center h-full">
       <button id="menu-close" class="absolute top-6 right-6 text-white text-3xl">&times;</button>
-      <a href="/#beranda" class="mobile-nav-link">Beranda</a>
-      <a href="/#profil" class="mobile-nav-link">Profil</a>
-      <a href="/#sejarah" class="mobile-nav-link">Sejarah</a>
-      <a href="/#program" class="mobile-nav-link">Program</a>
-      <a href="/#fasilitas" class="mobile-nav-link">Fasilitas</a>
-      <a href="/#prestasi" class="mobile-nav-link">Prestasi</a>
-      <a href="/#berita" class="mobile-nav-link">Berita</a>
-      <a href="/#galeri" class="mobile-nav-link">Galeri</a>
-      <a href="/#acara" class="mobile-nav-link">Acara</a>
-      <a href="/#kontak" class="mobile-nav-link">Kontak</a>
-      <a href="https://bali.spmb.id" class="btn btn-accent" target="_blank">PPDB Online</a>
+      <div class="mobile-nav">
+        <a href="/#beranda" class="mobile-nav-link" data-section>Beranda</a>
+        <div class="mobile-nav-group">
+          <button class="mobile-nav-toggle">Profil</button>
+          <div class="mobile-nav-sub">
+            <a href="/#sejarah" class="mobile-nav-link" data-section>Sejarah</a>
+            <a href="/#fasilitas" class="mobile-nav-link" data-section>Fasilitas</a>
+            <a href="/#prestasi" class="mobile-nav-link" data-section>Prestasi</a>
+          </div>
+        </div>
+        <div class="mobile-nav-group">
+          <button class="mobile-nav-toggle">Program</button>
+          <div class="mobile-nav-sub">
+            {programs.map((p: any) => <a href={`/detail/${p.id}`} class="mobile-nav-link">{p.singkat}</a>)}
+          </div>
+        </div>
+        <a href="/#berita" class="mobile-nav-link" data-section>Berita</a>
+        <a href="/#galeri" class="mobile-nav-link" data-section>Galeri</a>
+        <a href="/#kontak" class="mobile-nav-link" data-section>Kontak</a>
+        <a href="https://bali.spmb.id" class="btn btn-accent mt-6" target="_blank">PPDB Online</a>
+      </div>
     </div>
   </div>
 
@@ -108,9 +126,9 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/')
         <div class="footer-links">
           <h3 class="text-lg font-bold mb-4">Kontak</h3>
           <ul class="footer-contact">
-            <li class="flex items-start mb-3"><span class="mr-3">📍</span><span class="text-neutral-400">Jl. Diponegoro No.9, Delod Peken, Kec. Tabanan, Kabupaten Tabanan, Bali 82121</span></li>
-            <li class="flex items-start mb-3"><span class="mr-3">📞</span><span class="text-neutral-400">(0361) 811012</span></li>
-            <li class="flex items-start mb-3"><span class="mr-3">✉️</span><span class="text-neutral-400">info@smkn1tabanan.sch.id</span></li>
+            <li class="flex items-start mb-3"><span class="text-neutral-400">Jl. Diponegoro No.9, Delod Peken, Kec. Tabanan, Kabupaten Tabanan, Bali 82121</span></li>
+            <li class="flex items-start mb-3"><span class="text-neutral-400">(0361) 811012</span></li>
+            <li class="flex items-start mb-3"><span class="text-neutral-400">info@smkn1tabanan.sch.id</span></li>
           </ul>
         </div>
       </div>
@@ -138,13 +156,21 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/')
     const closeMenu = () => { mobileMenu?.classList.add('translate-x-full'); menuToggle?.classList.remove('open'); document.body.style.overflow = '' }
     menuToggle?.addEventListener('click', () => { mobileMenu?.classList.remove('translate-x-full'); menuToggle.classList.add('open'); document.body.style.overflow = 'hidden' })
     menuClose?.addEventListener('click', closeMenu)
-    document.querySelectorAll('.mobile-nav-link').forEach(l => l.addEventListener('click', closeMenu))
+    document.querySelectorAll('[data-section]').forEach(l => l.addEventListener('click', closeMenu))
+
+    document.querySelectorAll('.mobile-nav-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        btn.classList.toggle('open')
+        const sub = btn.nextElementSibling
+        if (sub) sub.classList.toggle('open')
+      })
+    })
 
     const backBtn = document.getElementById('back-to-top')
     window.addEventListener('scroll', () => { backBtn?.classList.toggle('hidden', window.scrollY <= 300); backBtn?.classList.toggle('visible', window.scrollY > 300) })
     backBtn?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }))
 
-    const navLinks = document.querySelectorAll('.nav-link')
+    const navLinks = document.querySelectorAll('.nav-link:not(.dropdown-toggle)')
     const sections = document.querySelectorAll('section[id]')
     window.addEventListener('scroll', () => {
       let current = ''

@@ -8,7 +8,7 @@ const programs = defineCollection({
     kode: z.string(),
     singkat: z.string(),
     nama: z.string(),
-    icon: z.string(),
+
     bidang: z.string(),
     dayaTampung: z.number(),
     deskripsi: z.string(),
