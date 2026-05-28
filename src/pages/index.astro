@@ -168,7 +168,7 @@ const formatDateShort = (d: string) => {
               <div class="program-icon mb-4"></div>
               <h3 class="text-xl font-bold mb-3">{p.nama}</h3>
               <p class="text-neutral-600 mb-4">{p.deskripsi}</p>
-              <a href={`/detail/${p.id}`} class={`${colorClasses[p.warna]} font-medium`}>Pelajari lebih lanjut →</a>
+              <a href={base + 'detail/' + p.id} class={`${colorClasses[p.warna]} font-medium`}>Pelajari lebih lanjut →</a>
             </div>
           </div>
         ))}
