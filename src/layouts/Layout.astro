@@ -38,9 +38,8 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/')
           <li class="nav-item dropdown">
             <a href={base + '#profil'} class="nav-link dropdown-toggle">Profil</a>
             <ul class="dropdown-menu">
-              <li><a href={base + '#sejarah'} class="dropdown-link">Sejarah</a></li>
-              <li><a href={base + '#fasilitas'} class="dropdown-link">Fasilitas</a></li>
-              <li><a href={base + '#prestasi'} class="dropdown-link">Prestasi</a></li>
+              <li><a href={base + '#profil'} class="dropdown-link">Visi & Misi</a></li>
+              <li><a href={base + 'sejarah'} class="dropdown-link">Sejarah</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown">
@@ -51,6 +50,8 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/')
           </li>
           <li class="nav-item"><a href={base + '#berita'} class="nav-link">Berita</a></li>
           <li class="nav-item"><a href={base + '#galeri'} class="nav-link">Galeri</a></li>
+          <li class="nav-item"><a href={base + 'fasilitas'} class="nav-link">Fasilitas</a></li>
+          <li class="nav-item"><a href={base + 'prestasi'} class="nav-link">Prestasi</a></li>
           <li class="nav-item"><a href={base + '#kontak'} class="nav-link">Kontak</a></li>
           <li class="nav-item"><a href="https://bali.spmb.id" class="btn btn-accent text-sm px-4 py-2 ml-2" target="_blank">PPDB Online</a></li>
         </ul>
@@ -69,9 +70,8 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/')
         <div class="mobile-nav-group">
           <button class="mobile-nav-toggle">Profil</button>
           <div class="mobile-nav-sub">
-            <a href={base + '#sejarah'} class="mobile-nav-link" data-section>Sejarah</a>
-            <a href={base + '#fasilitas'} class="mobile-nav-link" data-section>Fasilitas</a>
-            <a href={base + '#prestasi'} class="mobile-nav-link" data-section>Prestasi</a>
+            <a href={base + '#profil'} class="mobile-nav-link" data-section>Visi & Misi</a>
+            <a href={base + 'sejarah'} class="mobile-nav-link">Sejarah</a>
           </div>
         </div>
         <div class="mobile-nav-group">
@@ -82,6 +82,8 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/')
         </div>
         <a href={base + '#berita'} class="mobile-nav-link" data-section>Berita</a>
         <a href={base + '#galeri'} class="mobile-nav-link" data-section>Galeri</a>
+        <a href={base + 'fasilitas'} class="mobile-nav-link">Fasilitas</a>
+        <a href={base + 'prestasi'} class="mobile-nav-link">Prestasi</a>
         <a href={base + '#kontak'} class="mobile-nav-link" data-section>Kontak</a>
         <a href="https://bali.spmb.id" class="btn btn-accent mt-6" target="_blank">PPDB Online</a>
       </div>
@@ -108,10 +110,10 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/')
           <ul>
             <li><a href={base + '#beranda'} class="footer-link">Beranda</a></li>
             <li><a href={base + '#profil'} class="footer-link">Profil</a></li>
-            <li><a href={base + '#sejarah'} class="footer-link">Sejarah</a></li>
+            <li><a href={base + 'sejarah'} class="footer-link">Sejarah</a></li>
             <li><a href={base + '#program'} class="footer-link">Program Keahlian</a></li>
-            <li><a href={base + '#fasilitas'} class="footer-link">Fasilitas</a></li>
-            <li><a href={base + '#prestasi'} class="footer-link">Prestasi</a></li>
+            <li><a href={base + 'fasilitas'} class="footer-link">Fasilitas</a></li>
+            <li><a href={base + 'prestasi'} class="footer-link">Prestasi</a></li>
             <li><a href={base + '#berita'} class="footer-link">Berita</a></li>
             <li><a href={base + '#galeri'} class="footer-link">Galeri</a></li>
             <li><a href={base + '#kontak'} class="footer-link">Kontak</a></li>

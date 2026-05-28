@@ -1,0 +1,37 @@
+---
+import Layout from '../layouts/Layout.astro'
+
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/')
+
+const fasilitas = [
+  { title: 'Laboratorium Komputer', desc: 'Dilengkapi komputer terbaru dan koneksi internet cepat' },
+  { title: 'Laboratorium Akuntansi', desc: 'Fasilitas praktik untuk program keahlian Akuntansi' },
+  { title: 'Business Center', desc: 'Tempat praktik kewirausahaan dan pemasaran' },
+  { title: 'Perpustakaan Digital', desc: 'Koleksi buku dan sumber belajar digital' },
+  { title: 'Aula Serbaguna', desc: 'Ruang pertemuan dan kegiatan dengan kapasitas besar' },
+  { title: 'Lapangan Olahraga', desc: 'Fasilitas olahraga lengkap untuk kegiatan siswa' },
+]
+---
+
+<Layout title="Fasilitas — SMK Negeri 1 Tabanan" description="Fasilitas modern SMK Negeri 1 Tabanan untuk mendukung pembelajaran optimal">
+  <section class="min-h-[40vh] flex items-center bg-primary-900 text-white" style="background: linear-gradient(135deg, #1B3A5C, #162E4A);">
+    <div class="container text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Fasilitas Sekolah</h1>
+      <p class="text-lg text-neutral-300">Didukung fasilitas modern untuk mendukung proses belajar mengajar yang optimal</p>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-24 bg-neutral-50">
+    <div class="container">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {fasilitas.map((f, i) => (
+          <div class="facility-card" data-aos="fade-up" data-aos-delay={(i % 3) * 100}>
+            <div class="facility-icon mb-4"></div>
+            <h3 class="text-xl font-bold mb-3">{f.title}</h3>
+            <p class="text-neutral-600">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>

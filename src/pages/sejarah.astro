@@ -1,0 +1,42 @@
+---
+import Layout from '../layouts/Layout.astro'
+
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/')
+
+const sejarahMilestones = [
+  { tahun: '1962', text: 'Pemerintah Kabupaten Tabanan menggagas berdirinya SMEA Tabanan untuk menampung lulusan SMEP. Berlokasi di gedung SD sekitar Pasar Tabanan dengan bangunan bambu (bangsal) sebagai tempat belajar.' },
+  { tahun: '1964', text: 'Surat Keputusan Pemerintah tentang berdirinya SMEA Negeri Tabanan, dengan Kepala Sekolah pertama I Dewa Gede Rai Konta. Mengasuh dua jurusan: Tata Buku (cikal bakal Akuntansi) dan Tata Niaga (cikal bakal Pemasaran).' },
+  { tahun: '1967', text: 'SMEA Negeri Tabanan dipindahkan ke lokasi sekarang (Jl. Diponegoro). Siswa dan guru bergotong royong membangun gedung dari bahan-bahan sederhana. Semangat belajar tetap tinggi meskipun dengan fasilitas seadanya.' },
+  { tahun: '1968—1989', text: 'Dipimpin I Nyoman Retu Giri, sekolah meraih segudang prestasi akademis maupun non akademis. Mengasuh tiga jurusan: Tata Buku, Tata Niaga dan Tata Usaha (cikal bakal Administrasi Perkantoran).' },
+  { tahun: '18 Mar 1997', text: 'Perubahan nama dari SMEA Negeri Tabanan menjadi SMK Negeri 1 Tabanan melalui surat Edaran Direktorat Pendidikan Menengah Kejuruan. Bidang Keahlian: Bisnis dan Manajemen dengan tiga program: Akuntansi, Penjualan dan Sekretaris.' },
+  { tahun: '2005', text: 'Ditetapkan sebagai SMK Berstandar Nasional (SSN) pada tahun 2005, dan kemudian sebagai SMK Berstandar Internasional (SBI) pada 18 Agustus 2009.' },
+  { tahun: 'Sekarang', text: 'Mengasuh 4 konsentrasi keahlian: Akuntansi dan Keuangan Lembaga (AKL), Bisnis Daring dan Pemasaran (BDP), Otomatisasi dan Tata Kelola Perkantoran (OTKP), serta Teknik Komputer dan Jaringan (TKJ). Terus berkembang mencetak lulusan yang kompeten, kompetitif, dan siap kerja.' },
+]
+---
+
+<Layout title="Sejarah — SMK Negeri 1 Tabanan" description="Perjalanan panjang SMK Negeri 1 Tabanan sejak tahun 1962">
+  <section class="min-h-[40vh] flex items-center bg-primary-900 text-white" style="background: linear-gradient(135deg, #1B3A5C, #162E4A);">
+    <div class="container text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Sejarah SMK Negeri 1 Tabanan</h1>
+      <p class="text-lg text-neutral-300">Perjalanan panjang dalam mencetak generasi unggul sejak 1962</p>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-24 bg-neutral-50">
+    <div class="container">
+      <div class="relative max-w-4xl mx-auto">
+        <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-primary-200 hidden md:block"></div>
+        {sejarahMilestones.map((m, i) => (
+          <div class={`relative flex items-start mb-12 ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`} data-aos={i % 2 === 0 ? 'fade-right' : 'fade-left'}>
+            <div class="hidden md:flex w-1/2"></div>
+            <div class="hidden md:flex absolute left-1/2 transform -translate-x-1/2 z-10 w-6 h-6 rounded-full bg-primary-500 border-4 border-white shadow"></div>
+            <div class="w-full md:w-1/2 bg-white p-6 rounded-xl shadow-md">
+              <span class="text-primary-500 font-bold text-xl">{m.tahun}</span>
+              <p class="text-neutral-600 mt-2">{m.text}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>

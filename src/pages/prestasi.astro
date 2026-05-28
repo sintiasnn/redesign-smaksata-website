@@ -1,0 +1,32 @@
+---
+import Layout from '../layouts/Layout.astro'
+
+const prestasi = [
+  { title: 'Juara LKS Tingkat Nasional', desc: 'Juara 1 Lomba Kompetensi Siswa bidang Akuntansi tingkat Nasional 2023' },
+  { title: 'Sekolah Adiwiyata', desc: 'Penghargaan Sekolah Adiwiyata tingkat Nasional tahun 2022' },
+  { title: 'Juara Debat Bahasa Inggris', desc: 'Juara 1 Lomba Debat Bahasa Inggris tingkat Provinsi 2023' },
+]
+---
+
+<Layout title="Prestasi — SMK Negeri 1 Tabanan" description="Berbagai prestasi membanggakan yang telah diraih SMK Negeri 1 Tabanan">
+  <section class="min-h-[40vh] flex items-center bg-primary-900 text-white" style="background: linear-gradient(135deg, #1B3A5C, #162E4A);">
+    <div class="container text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Prestasi Kami</h1>
+      <p class="text-lg text-neutral-300">Berbagai prestasi membanggakan yang telah diraih di berbagai bidang</p>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-24 bg-neutral-50">
+    <div class="container">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {prestasi.map((p, i) => (
+          <div class="achievement-card" data-aos="fade-up" data-aos-delay={(i + 1) * 100}>
+            <div class="achievement-icon mb-4"></div>
+            <h3 class="text-2xl font-bold mb-3">{p.title}</h3>
+            <p class="text-neutral-300">{p.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
