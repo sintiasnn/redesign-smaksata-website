@@ -14,14 +14,29 @@
 
 ---
 
-## Tahap 1: Stabilisasi (Sekarang)
+## Tahap 1: Stabilisasi + UI/UX (Sekarang)
 
+### Technical
 - [x] Build otomatis via Actions saat push ke `main`
 - [ ] Ganti form `action` URL (daftar di formspree.io atau setup endpoint sendiri)
-- [ ] Isi placeholder image dengan foto asli sekolah
 - [ ] Setup GitHub OAuth App untuk Decap CMS — **done** (client_id: `Ov23liLNWmREkAN2pg0g`)
 - [ ] Jadikan Decap CMS release (bukan draft)
 - [ ] Verifikasi semua internal link berfungsi di production
+- [ ] `npm run typecheck` lulus — **done** (0 error)
+
+### UI/UX
+- [ ] Buat komponen reusable: `Card.astro`, `SectionHeading.astro`, `ProgramCard.astro`
+- [ ] Ganti semua placeholder image dengan foto asli sekolah (gedung, kegiatan, fasilitas)
+- [ ] Alt text galeri — ganti yang seragam `"Dokumentasi Sekolah"` jadi deskripsi per foto
+- [ ] Mobile dropdown — tambah scroll atau grouping biar ga kepanjangan
+- [ ] Dropdown keyboard navigation — bukan cuma CSS hover
+- [ ] Skip to content link untuk aksesibilitas
+- [ ] Loading state gambar (aspect-ratio placeholder biar no layout shift)
+- [ ] Section padding konsisten — buat pattern dari `py-16 md:py-24` + bg selang-seling
+- [ ] Halaman detail berita (`/berita/:slug`) — saat ini link berita masih dead
+- [ ] Social media links — ganti `href="#"` dengan akun real (Instagram, YouTube)
+- [ ] Favicon — ganti dengan logo asli sekolah
+- [ ] Animasi AOS di hero slider — efektif ga? slide berganti tiap 5 detik
 
 ---
 
