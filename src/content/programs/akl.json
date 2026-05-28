@@ -1,0 +1,40 @@
+{
+  "id": "akl",
+  "kode": "AKL",
+  "singkat": "Akuntansi",
+  "nama": "Akuntansi dan Keuangan Lembaga",
+  "icon": "📊",
+  "bidang": "Bisnis dan Manajemen",
+  "dayaTampung": 108,
+  "deskripsi": "Program Keahlian Akuntansi dan Keuangan Lembaga (AKL) membekali peserta didik dengan pengetahuan dan keterampilan di bidang akuntansi, perpajakan, dan pengelolaan keuangan lembaga. Lulusan program ini siap bekerja sebagai akuntan, staf keuangan, atau melanjutkan studi ke perguruan tinggi.",
+  "warna": "primary",
+  "pelajaran": [
+    "Akuntansi Dasar",
+    "Akuntansi Keuangan",
+    "Akuntansi Perusahaan Jasa, Dagang, dan Manufaktur",
+    "Perpajakan",
+    "Komputer Akuntansi (MYOB, Accurate)",
+    "Pengelolaan Kas",
+    "Administrasi Pajak",
+    "Excel for Accounting"
+  ],
+  "fasilitas": [
+    "Laboratorium Akuntansi",
+    "Laboratorium Komputer",
+    "Ruang Praktik Simulasi Perusahaan",
+    "Software Akuntansi Terintegrasi"
+  ],
+  "prospek": [
+    "Akuntan Publik",
+    "Staf Keuangan",
+    "Konsultan Pajak",
+    "Analis Keuangan",
+    "Wirausaha"
+  ],
+  "pkl": [
+    "Kantor Akuntan Publik",
+    "Perusahaan Swasta",
+    "Bank dan Lembaga Keuangan",
+    "Kantor Pajak"
+  ]
+}

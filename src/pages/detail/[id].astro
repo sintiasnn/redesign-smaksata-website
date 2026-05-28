@@ -1,0 +1,109 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import { getCollection } from 'astro:content'
+
+export async function getStaticPaths() {
+  const programs = await getCollection('programs')
+  return programs.map((entry) => ({
+    params: { id: entry.data.id },
+    props: { program: entry.data },
+  }))
+}
+
+const { program } = Astro.props
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/')
+
+const heroBgMap = {
+  akl: `${base}assets/images/program-akuntansi.svg`,
+  bdp: `${base}assets/images/program-bisnis-digital.svg`,
+  otkp: `${base}assets/images/program-manajemen-perkantoran.svg`,
+  tkj: `${base}assets/images/program-tkj.svg`,
+}
+---
+
+<Layout title={`${program.nama} — SMK Negeri 1 Tabanan`} description={program.deskripsi}>
+  <section class="relative min-h-[50vh] flex items-center" style={`background: linear-gradient(135deg, #0A3D62, #0066c0); background-image: url('${heroBgMap[program.id]}'); background-size: cover; background-position: center;`}>
+    <div class="absolute inset-0 bg-black/60"></div>
+    <div class="container relative z-10 text-white text-center">
+      <span class="inline-block bg-accent-500 text-neutral-900 text-sm font-bold px-4 py-2 rounded-full mb-4">{program.kode} — {program.singkat}</span>
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">{program.nama}</h1>
+      <p class="text-lg md:text-xl text-neutral-200 mb-2">Bidang Keahlian: {program.bidang}</p>
+      <p class="text-lg text-accent-400 font-semibold">Daya Tampung: {program.dayaTampung} siswa</p>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-24 bg-white">
+    <div class="container max-w-4xl">
+      <div data-aos="fade-up">
+        <h2 class="text-2xl md:text-3xl font-bold mb-6">Tentang {program.nama}</h2>
+        <p class="text-neutral-600 text-lg leading-relaxed">{program.deskripsi}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-neutral-50">
+    <div class="container max-w-4xl">
+      <h2 class="text-2xl md:text-3xl font-bold mb-8 text-center" data-aos="fade-up">Kompetensi yang Dipelajari</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4" data-aos="fade-up">
+        {program.pelajaran.map((item: string) => (
+          <div class="flex items-start bg-white p-4 rounded-xl shadow-sm border border-neutral-100">
+            <span class="text-primary-600 mr-3 mt-0.5">✓</span>
+            <span class="text-neutral-700">{item}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {program.fasilitas?.length > 0 && (
+    <section class="py-16 bg-white">
+      <div class="container max-w-4xl">
+        <h2 class="text-2xl md:text-3xl font-bold mb-8 text-center" data-aos="fade-up">Fasilitas</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4" data-aos="fade-up">
+          {program.fasilitas.map((item: string) => (
+            <div class="flex items-start bg-neutral-50 p-4 rounded-xl border border-neutral-200">
+              <span class="text-secondary-500 mr-3 mt-0.5">✦</span>
+              <span class="text-neutral-700">{item}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="py-16 bg-neutral-50">
+    <div class="container max-w-4xl">
+      <h2 class="text-2xl md:text-3xl font-bold mb-8 text-center" data-aos="fade-up">Peluang Kerja</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" data-aos="fade-up">
+        {program.prospek.map((item: string) => (
+          <div class="bg-white p-5 rounded-xl shadow-sm border border-neutral-100 text-center hover:shadow-md transition-shadow">
+            <div class="text-accent-500 text-2xl mb-2">💼</div>
+            <span class="text-neutral-800 font-medium">{item}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-white">
+    <div class="container max-w-4xl">
+      <h2 class="text-2xl md:text-3xl font-bold mb-8 text-center" data-aos="fade-up">Tempat PKL / Magang</h2>
+      <div class="flex flex-wrap justify-center gap-3" data-aos="fade-up">
+        {program.pkl.map((item: string) => (
+          <span class="inline-block px-4 py-2 bg-primary-50 text-primary-700 rounded-full text-sm font-medium border border-primary-200">{item}</span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-primary-900 text-white text-center">
+    <div class="container" data-aos="fade-up">
+      <h2 class="text-3xl font-bold mb-4">Tertarik Bergabung?</h2>
+      <p class="text-lg text-neutral-300 mb-8">Daftarkan dirimu sekarang dan raih masa depan cerah bersama SMK Negeri 1 Tabanan</p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="https://bali.spmb.id" class="btn btn-accent" target="_blank">Daftar PPDB Online</a>
+        <a href="/#kontak" class="btn btn-outline-white">Hubungi Kami</a>
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,41 @@
+{
+  "id": "tkj",
+  "kode": "TKJ",
+  "singkat": "Teknik Komputer",
+  "nama": "Teknik Komputer dan Jaringan",
+  "icon": "💻",
+  "bidang": "Teknologi Informasi",
+  "dayaTampung": 108,
+  "deskripsi": "Program Keahlian Teknik Komputer dan Jaringan (TKJ) membekali peserta didik dengan keahlian di bidang jaringan komputer, administrasi server, dan keamanan siber. Lulusan siap menjadi network engineer, IT support, atau system administrator.",
+  "warna": "primary",
+  "pelajaran": [
+    "Komputer dan Jaringan Dasar",
+    "Administrasi Server",
+    "Jaringan Nirkabel",
+    "Keamanan Jaringan",
+    "IoT (Internet of Things)",
+    "Cloud Computing",
+    "Sistem Operasi",
+    "Troubleshooting Jaringan"
+  ],
+  "fasilitas": [
+    "Laboratorium Komputer",
+    "Laboratorium Jaringan",
+    "Ruang Server",
+    "Laboratorium IoT",
+    "Tools dan Peralatan Jaringan Lengkap"
+  ],
+  "prospek": [
+    "Network Engineer",
+    "IT Support",
+    "System Administrator",
+    "Teknisi Jaringan",
+    "Cyber Security Analyst"
+  ],
+  "pkl": [
+    "Perusahaan IT",
+    "ISP (Internet Service Provider)",
+    "Data Center",
+    "Perusahaan Telekomunikasi"
+  ]
+}
