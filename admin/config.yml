@@ -2,10 +2,9 @@ backend:
   name: github
   repo: sintiasnn/redesign-smaksata-website
   branch: main
-  base_url: https://github.com
 
-media_folder: src/assets/images
-public_folder: /src/assets/images
+media_folder: public/assets/images
+public_folder: assets/images
 
 collections:
   - name: berita
@@ -53,7 +52,6 @@ collections:
       - { label: Kode, name: kode, widget: string }
       - { label: Singkatan, name: singkat, widget: string }
       - { label: Nama Lengkap, name: nama, widget: string }
-      - { label: Icon, name: icon, widget: string }
       - { label: Bidang, name: bidang, widget: string }
       - { label: Daya Tampung, name: dayaTampung, widget: number, value_type: int }
       - { label: Deskripsi, name: deskripsi, widget: text }
