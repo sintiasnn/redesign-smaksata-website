@@ -16,10 +16,12 @@ Landing page modern untuk SMK Negeri 1 Tabanan — sekolah menengah kejuruan di 
 
 **Redesign SMK Negeri 1 Tabanan** adalah revamp total dari website sekolah. Situs asli menggunakan WordPress; versi ini berupa situs statis multi-halaman dengan:
 
-- **Landing page** satu halaman penuh dengan hero slider, profil, sejarah, program keahlian, fasilitas, prestasi, berita, galeri, acara, dan kontak.
-- **Halaman detail** untuk setiap program keahlian (AKL, BDP, MPLB/OTKP, TKJ) dengan kompetensi, fasilitas, prospek kerja, dan tempat PKL.
-- **Content collections** untuk berita dan acara menggunakan MDX.
-- **Data-driven** — data program keahlian dari file JSON, konten dari MDX frontmatter.
+- **Landing page** 6 section: Hero slider, Profil, Program, Berita, Galeri, Kontak
+- **Halaman terpisah:** Sejarah (timeline), Fasilitas, Prestasi
+- **Halaman detail** setiap program keahlian (AKL, BDP, MPLB/OTKP, TKJ)
+- **Data-driven** — program dari JSON, berita dari MDX content collections
+- **Decap CMS** — manajemen konten via panel admin
+- **TypeScript strict** — type-safe di semua komponen
 
 ---
 
@@ -28,64 +30,59 @@ Landing page modern untuk SMK Negeri 1 Tabanan — sekolah menengah kejuruan di 
 ```
 redesign-smaksata-website/
 ├── public/
-│   ├── admin/             # Decap CMS config
-│   └── assets/            # Static images (copied to build)
+│   ├── admin/             # Decap CMS
+│   └── assets/            # Static images
 ├── src/
-│   ├── assets/            # Source assets (original copies)
-│   ├── components/        # Astro components
+│   ├── components/        # Navbar, Footer, PageHero
 │   ├── content/
-│   │   ├── programs/      # Program data (JSON)
-│   │   ├── berita/        # Berita entries (MDX)
-│   │   └── acara/         # Acara entries (MDX)
-│   ├── css/
-│   │   └── main.css       # Tailwind v4 + custom styles
-│   ├── layouts/
-│   │   └── Layout.astro   # Root layout (header, footer, SEO)
-│   └── pages/
-│       ├── index.astro    # Landing page
-│       └── detail/
-│           └── [id].astro # Program detail pages
-├── .github/workflows/
-│   └── deploy.yml         # GitHub Actions → GitHub Pages
-├── astro.config.mjs       # Astro config (base, integrations)
-├── src/content.config.ts  # Content collection schemas
-├── package.json           # Dependencies & scripts
-└── README.md
+│   │   ├── programs/      # JSON
+│   │   └── berita/        # MDX
+│   ├── css/main.css       # Tailwind v4 + custom styles
+│   ├── layouts/Layout.astro
+│   ├── pages/
+│   │   ├── index.astro
+│   │   ├── sejarah.astro
+│   │   ├── fasilitas.astro
+│   │   ├── prestasi.astro
+│   │   └── detail/[id].astro
+│   └── types.d.ts
+├── .github/workflows/deploy.yml
+├── CMS-PLAN.md            # Rencana CMS + GitHub Org
+├── CONTRIBUTING.md        # Pedoman kontribusi
+├── DEPLOYMENT.md          # Rencana deployment
+├── UI-UX-GUIDE.md         # Pedoman desain & prioritas
+├── astro.config.mjs
+├── src/content.config.ts
+├── package.json
+└── tsconfig.json
 ```
 
 ---
 
 ## Fitur
 
-### 1. Hero Slider
-Slider Swiper layar penuh dengan autoplay, overlay teks, dan tombol CTA.
+- **Hero slider** — Swiper fullscreen dengan autoplay, overlay, CTA
+- **Navbar dropdown** — hover di desktop, accordion di mobile
+- **Timeline Sejarah** — linimasa visual dari 1962 di `/sejarah`
+- **Program data-driven** — JSON + halaman detail tiap jurusan
+- **Galeri + Lightbox** — keyboard navigasi (panah, ESC)
+- **Berita via CMS** — MDX content collection + Decap CMS
+- **Animasi scroll** — AOS fade-in tiap section
+- **Responsif** — mobile-first, hamburger menu
+- **TypeScript strict** — 0 error typecheck
+- **Palette Biru Navy + Emas** — identitas SMK Negeri
+- **Build otomatis** — push → GitHub Actions → deploy
 
-### 2. Timeline Sejarah
-Linimasa visual dari 1962 hingga sekarang, dengan layout bergantian di desktop.
+---
 
-### 3. Kartu Program Data-Driven
-Empat program keahlian di-render dari file JSON dengan warna dan ikon masing-masing.
+## Dokumen Terkait
 
-### 4. Halaman Detail Tiap Program
-Halaman terpisah berisi kompetensi, fasilitas, prospek kerja, dan tempat PKL.
-
-### 5. Galeri Interaktif
-Grid gambar responsif dengan lightbox — navigasi keyboard (panah, ESC).
-
-### 6. Berita & Acara
-Konten dikelola via MDX frontmatter dengan format tanggal dan gambar.
-
-### 7. Animasi Scroll
-AOS (Animate on Scroll) — setiap section muncul dengan animasi fade.
-
-### 8. Desain Responsif
-Fully responsive dengan hamburger menu di mobile.
-
-### 9. Form Kontak
-Form fungsional dengan validasi client-side dan embed Google Maps.
-
-### 10. Deployment Otomatis
-Push ke `main` langsung trigger GitHub Actions → build → deploy ke GitHub Pages.
+| File | Isi |
+|------|-----|
+| [CONTRIBUTING.md](CONTRIBUTING.md) | Pedoman kontribusi untuk developer |
+| [UI-UX-GUIDE.md](UI-UX-GUIDE.md) | Design system, component inventory, prioritas kerja |
+| [DEPLOYMENT.md](DEPLOYMENT.md) | Rencana deployment 5 tahap (target: Cloudflare Pages) |
+| [CMS-PLAN.md](CMS-PLAN.md) | Rencana CMS + migrasi ke GitHub Organization |
 
 ---
 
@@ -127,7 +124,12 @@ npm run build
 ```
 Hasil build ada di `dist/`.
 
-### 4. Preview Build
+### 4. Typecheck
+```bash
+npm run typecheck
+```
+
+### 5. Preview Build
 ```bash
 npm run preview
 ```
