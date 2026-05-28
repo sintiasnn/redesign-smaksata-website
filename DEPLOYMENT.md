@@ -11,6 +11,7 @@
 | CI/CD | GitHub Actions (`peaceiris/actions-gh-pages`) |
 | CMS | Decap CMS dengan PKCE OAuth |
 | Domain | Belum ada custom domain |
+| Target | **Cloudflare Pages** (custom domain + CDN) |
 
 ---
 
@@ -62,33 +63,30 @@ export default defineConfig({
 
 **Catatan:** Kalau pake `.sch.id` — pastikan registrasi domain sudah diurus oleh pihak sekolah (biasanya via Pandi atau penyedia `.sch.id`).
 
-### 2b. Pindah ke Netlify (Opsional 2)
+### 2b. Pindah ke Cloudflare Pages (Opsional 2 — Recommended)
 
-Netlify lebih mudah untuk Decap CMS karena OAuth built-in.
+Cloudflare Pages lebih cepat, unlimited bandwidth, dan integrasi DNS + CDN seamless.
 
 **Langkah:**
-1. Buat akun Netlify, connect GitHub repo
-2. Build command: `npm run build`
-3. Publish directory: `dist/`
-4. Netlify otomatis handle HTTPS + custom domain
-5. Decap CMS bisa pake Netlify Identity + Git Gateway (tanpa setup OAuth App manual)
-6. Update `config.yml`:
-```yaml
-backend:
-  name: git-gateway
-  repo: sintiasnn/redesign-smaksata-website
-  branch: main
-```
-7. Update `public/admin/index.html` — hapus `CMS_CONFIG` (Netlify handle auth)
-8. Netlify form handler built-in — form kontak tinggal tambah `netlify` attribute
+1. Buat akun Cloudflare, dashboard → Workers & Pages → Pages
+2. Connect GitHub repo, pilih branch `main`
+3. Build settings:
+   - Build command: `npm run build`
+   - Build output: `dist/`
+   - Root directory: `/`
+4. Environment variables (jika perlu): `NODE_VERSION=22`
+5. Setelah deploy, tinggal add custom domain (Cloudflare otomatis handle SSL + proxy)
 
-### 2c. Pindah ke Vercel (Opsional 3)
+**Untuk Decap CMS:**
+- Cloudflare Pages tidak punya OAuth built-in seperti Netlify
+- Tetap perlu GitHub OAuth PKCE (yang sudah jalan sekarang)
+- Atau deploy OAuth worker: Cloudflare Functions bisa jadi proxy OAuth sendiri
 
-1. Import repo ke Vercel
-2. Framework preset: Astro
-3. Vercel otomatis handle HTTPS + CDN
-4. Untuk Decap CMS tetap perlu OAuth server atau GitHub PKCE (seperti sekarang)
-5. Form kontak pake Vercel Edge Functions atau formspree
+**Keunggulan:**
+- Tidak ada biaya bandwidth (unlimited)
+- Global CDN dari Cloudflare (300+ cities)
+- DNS management satu atap
+- Instant rollback
 
 ---
 
@@ -129,8 +127,9 @@ backend:
 
 Jika terjadi masalah setelah deploy:
 1. GitHub Pages: trigger ulang workflow dari commit sebelumnya
-2. Netlify: rollback ke deploy sebelumnya dari dashboard
-3. Vercel: instant rollback dari dashboard
+2. Cloudflare Pages: rollback ke deploy sebelumnya dari dashboard → Deployment → ... → Rollback
+3. Netlify: rollback ke deploy sebelumnya dari dashboard
+4. Vercel: instant rollback dari dashboard
 
 ---
 
