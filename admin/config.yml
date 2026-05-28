@@ -1,0 +1,64 @@
+backend:
+  name: github
+  repo: sintiasnn/redesign-smaksata-website
+  branch: main
+  base_url: https://github.com
+
+media_folder: src/assets/images
+public_folder: /src/assets/images
+
+collections:
+  - name: berita
+    label: Berita
+    folder: src/content/berita
+    create: true
+    format: frontmatter
+    extension: mdx
+    slug: "{{slug}}"
+    fields:
+      - { label: Judul, name: title, widget: string }
+      - { label: Tanggal, name: date, widget: datetime, format: "YYYY-MM-DD" }
+      - { label: Gambar, name: image, widget: image, required: false }
+      - { label: Penulis, name: author, widget: string, required: false }
+      - { label: Tags, name: tags, widget: list, required: false }
+      - { label: Konten, name: body, widget: markdown }
+
+  - name: acara
+    label: Acara
+    folder: src/content/acara
+    create: true
+    format: frontmatter
+    extension: mdx
+    slug: "{{slug}}"
+    fields:
+      - { label: Judul, name: title, widget: string }
+      - { label: Tanggal, name: date, widget: string }
+      - { label: Deskripsi Singkat, name: desc, widget: text }
+      - { label: Gambar, name: image, widget: image, required: false }
+      - { label: Tipe, name: type, widget: select, options: [workshop, meetup, lomba, sosialisasi, lainnya], required: false }
+      - { label: Konten, name: body, widget: markdown, required: false }
+
+  - name: programs
+    label: Program Keahlian
+    folder: src/content/programs
+    create: false
+    format: json
+    extension: json
+    slug: "{{id}}"
+    identifier_field: id
+    editor:
+      preview: false
+    fields:
+      - { label: ID, name: id, widget: string }
+      - { label: Kode, name: kode, widget: string }
+      - { label: Singkatan, name: singkat, widget: string }
+      - { label: Nama Lengkap, name: nama, widget: string }
+      - { label: Icon, name: icon, widget: string }
+      - { label: Bidang, name: bidang, widget: string }
+      - { label: Daya Tampung, name: dayaTampung, widget: number, value_type: int }
+      - { label: Deskripsi, name: deskripsi, widget: text }
+      - { label: Warna, name: warna, widget: select, options: [primary, secondary, accent] }
+      - { label: Pelajaran, name: pelajaran, widget: list, field: { label: Mata Pelajaran, name: item, widget: string } }
+      - { label: Fasilitas, name: fasilitas, widget: list, field: { label: Fasilitas, name: item, widget: string }, required: false }
+      - { label: Prospek Kerja, name: prospek, widget: list, field: { label: Prospek, name: item, widget: string } }
+      - { label: Tempat PKL, name: pkl, widget: list, field: { label: Tempat, name: item, widget: string } }
