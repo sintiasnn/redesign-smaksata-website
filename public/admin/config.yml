@@ -2,6 +2,8 @@ backend:
   name: github
   repo: sintiasnn/redesign-smaksata-website
   branch: main
+  client_id: Ov23liLNWmREkAN2pg0g
+  auth_type: pkce
 
 media_folder: public/assets/images
 public_folder: assets/images
